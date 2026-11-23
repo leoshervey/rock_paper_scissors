@@ -7,42 +7,78 @@
 </head>
 <body>
     <script>
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
         function getComputerChoice () {
             let pcChoice = Math.floor(Math.random() * 3) + 1;
             switch (pcChoice) {
                 case 1:
-                    return "Rock";
+                    return "rock";
                     break;
                 case 2:
-                    return "Paper";
+                    return "paper";
                     break;
                 case 3: 
-                    return "Scissors";
+                    return "scissors";
                     break;
             }
         }
         console.log(getComputerChoice);
 
         function getHumanChoice () {
-            return parseInt(prompt("Rock (1), Paper (2) or Scissors (3)?"));
+            let humanChoice = prompt("Rock, Paper or Scissors?");
+            return humanChoice.toLowerCase();
         }
 
         let computerScore = 0;
         let humanScore = 0;
 
         function playRound (humanChoice, computerChoice) {
-
+            console.log("You chose: " + humanChoice.toUpperCase());
+            console.log("The computer chose: " + computerChoice.toUpperCase());
+            let roundWinner;
+            if (humanChoice === "rock" && computerChoice === "scissors"){
+                roundWinner = "You";
+                console.log(roundWinner + " won the round.");
+                humanScore++;
+            } else if (humanChoice === "paper" && computerChoice === "rock") {
+                roundWinner = "You";
+                console.log(roundWinner + " won the round.");
+                humanScore++;
+            } else if (humanChoice === "scissors" && computerChoice === "paper") {
+                roundWinner = "You";
+                console.log(roundWinner + " won the round.");
+                humanScore++;
+            } else if (humanChoice === computerChoice) {
+                roundWinner = "Draw";
+                console.log("The round was a draw.");
+            } else {
+                roundWinner = "Computer";
+                console.log(roundWinner + " won the round.");
+                computerScore++;
+            }
+            console.log("The current score is ");
+            console.log("You "+humanScore +" - "+computerScore+" Computer");
         }
 
-        function playGame () {
-            for (let i = 0; i < 5; i++) {
-                print("Round " & i + 1);
+        async function playGame (rounds) {
+            for (let i = 0; i < rounds; i++) {
+                console.log("Round " + (i+1));
                 const humanSelection = getHumanChoice();
                 const computerSelection = getComputerChoice();
                 playRound(humanSelection, computerSelection);
+                await sleep(5000);
             }
-            
+            if (humanScore > computerScore){
+                console.log("You win | " + humanScore + " - " + computerScore);
+            } else if (humanScore < computerScore) {
+                console.log("You lose | " + humanScore + " - " + computerScore);
+            } else {
+                console.log("The game was a tie | " + humanScore + " - " + computerScore);
+            }
         }
+        let numberOfRounds = parseInt(prompt("How many rounds would you like to play?"));
+        playGame(numberOfRounds);
     </script>
 </body>
 </html>
