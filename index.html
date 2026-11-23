@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice () {
+            let pcChoice = Math.floor(Math.random() * 3) + 1;
+            switch (pcChoice) {
+                case 1:
+                    return "Rock";
+                    break;
+                case 2:
+                    return "Paper";
+                    break;
+                case 3: 
+                    return "Scissors";
+                    break;
+            }
+        }
+        console.log(getComputerChoice);
+
+        function getHumanChoice () {
+            return parseInt(prompt("Rock (1), Paper (2) or Scissors (3)?"));
+        }
+
+        let computerScore = 0;
+        let humanScore = 0;
+
+        function playRound (humanChoice, computerChoice) {
+
+        }
+
+        function playGame () {
+            for (let i = 0; i < 5; i++) {
+                print("Round " & i + 1);
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                playRound(humanSelection, computerSelection);
+            }
+            
+        }
+    </script>
+</body>
+</html>
